@@ -1,4 +1,4 @@
-package com.limlochvera.triage;
+package com.limloch.triage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

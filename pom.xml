@@ -11,7 +11,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.limlochvera</groupId>
+    <groupId>com.limloch</groupId>
+
     <artifactId>patient-triage-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>patient-triage-api</name>

@@ -17,7 +17,7 @@
 // Comments are left to provide understanding of what each class, method and
 // variable represents in this program.
 
-package com.limlochvera.triage;
+package com.limloch.triage;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

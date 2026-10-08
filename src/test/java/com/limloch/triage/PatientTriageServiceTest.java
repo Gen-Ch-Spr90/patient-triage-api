@@ -18,7 +18,7 @@
 // Comments are left to provide understanding of what each class, method and
 // variable represents in this program.
 
-package com.limlochvera.triage;
+package com.limloch.triage;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
