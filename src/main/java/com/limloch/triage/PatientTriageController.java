@@ -1,30 +1,12 @@
-// Program Name: patient-triage-api
-// Where & When: [Fill in your location and date]
-// Who Built: [Fill in your name]
-// Build Date: [Fill in exact build date]
-
-// Brief Description: This program exposes the PatientTriageService as a REST
-// API using Spring Web. It handles creating patients, listing them, fetching
-// the next patient, and returning the remaining count.
-
-// The program also uses constructor injection so the controller depends on an
-// abstraction rather than creating the service itself.
-
-// The program also returns standard HTTP status codes (200, 201, 404) so
-// clients can respond appropriately.
-
-// The program contains these classes: PatientTriageController.
-
-// Comments are left to provide understanding of what each class, method and
-// variable represents in this program.
-
 package com.limloch.triage;
 
+import com.limloch.triage.scoring.TriageScore;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/patients")
@@ -67,5 +49,20 @@ public class PatientTriageController {
     @GetMapping("/count")
     public int remainingCount() {
         return service.remainingCount();
+    }
+
+    @GetMapping("/{id}/triage-explanation")
+    public ResponseEntity<Map<String, Object>> triageExplanation(@PathVariable String id) {
+        TriageScore score = service.getTriageScore(id);
+        if (score == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(Map.of(
+                "patientId", id,
+                "total", score.total(),
+                "tier", score.tier().name(),
+                "tierDescription", score.tier().description(),
+                "factors", score.factors()
+        ));
     }
 }

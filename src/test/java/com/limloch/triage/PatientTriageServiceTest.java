@@ -24,6 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import com.limloch.triage.scoring.TriageScorer;
 
 class PatientTriageServiceTest {
 
@@ -31,7 +32,7 @@ class PatientTriageServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new PatientTriageService();
+        service = new PatientTriageService(new TriageScorer());
     }
 
     @Test

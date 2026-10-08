@@ -3,11 +3,14 @@ package com.limloch.triage.scoring;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Rule-based triage scoring engine. Weights and thresholds are simplified
  * versions of published clinical heuristics (ESI, START) for demonstration.
  * Real clinical scoring requires validated protocols and clinical oversight.
  */
+@Component
 public class TriageScorer {
 
     public TriageScore score(TriageInput input) {
