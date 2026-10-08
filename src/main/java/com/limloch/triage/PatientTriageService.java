@@ -49,6 +49,18 @@ public class PatientTriageService {
         Patient p = patientsById.get(id);
         return p == null ? null : p.getTriageScore();
     }
+    /**
+     * Returns the given patients ranked by effective urgency (highest first),
+     * with per-factor explanations included so a reviewer can see why each
+     * patient landed where they did.
+     */
+    public List<Patient> compare(List<String> ids) {
+        return ids.stream()
+                .map(patientsById::get)
+                .filter(java.util.Objects::nonNull)
+                .sorted((a, b) -> Integer.compare(b.effectiveUrgency(), a.effectiveUrgency()))
+                .toList();
+    }
 
     public List<Patient> listAll() {
         return new ArrayList<>(patientsById.values());
