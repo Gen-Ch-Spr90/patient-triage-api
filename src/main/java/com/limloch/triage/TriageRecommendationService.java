@@ -33,10 +33,19 @@ public class TriageRecommendationService {
     }
 
     private String buildQuestion(Patient top) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Patient with ");
+
         String complaint = top.getChiefComplaint();
-        if (complaint == null || complaint.isBlank()) {
-            complaint = "unspecified presentation";
-        }
-        return "Given the following chief complaint, what is the recommended immediate clinical action? Chief complaint: " + complaint;
+        sb.append(complaint == null || complaint.isBlank() ? "unspecified presentation" : complaint);
+
+        if (top.getSpo2() != null) sb.append(", SpO2 ").append(top.getSpo2()).append("%");
+        if (top.getSystolic() != null) sb.append(", systolic BP ").append(top.getSystolic()).append(" mmHg");
+        if (top.getHeartRate() != null) sb.append(", HR ").append(top.getHeartRate());
+        if (top.getGcs() != null) sb.append(", GCS ").append(top.getGcs());
+        if (top.getMechanismOfInjury() != null) sb.append(", mechanism: ").append(top.getMechanismOfInjury());
+
+        sb.append(". What is the immediate clinical management?");
+        return sb.toString();
     }
 }
